@@ -65,6 +65,9 @@ function waitAndClick(selector){
     })
 }
 
+function questionSolver(url){
+    
+}
      // dynamic site -> id change
 
     // create new promise -> wait ->
