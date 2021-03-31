@@ -1,3 +1,4 @@
+
 const puppeteer = require("puppeteer");
 
 let cTab;
@@ -46,7 +47,12 @@ browseropenPromise
         let linkArrPromise = cTab.evaluate(ConsoleWalaFn);
         return linkArrPromise;
     }).then(function(linkArr){
-        console.log(linkArr);
+        let questionWillBeSolvedPromise = questionSolver(linkArr[0] , 0);
+        return questionWillBeSolvedPromise;
+    }).then(function(){
+        resolve();
+    }).then(function(err){
+        reject(err);
     })
 
 
@@ -64,9 +70,53 @@ function waitAndClick(selector){
 
     })
 }
+let {answers} = require("./codes");
+function questionSolver(url ,idx){
+    return new Promise(function(resolve , reject){
+        let fullLink = `https://www.hackerrank.com${url}`;
+        let goToQuestionPagePromise = cTab.goto(fullLink);
+        goToQuestionPagePromise
+        .then(function(){
+            let waitForCheckBoxAndClick  = waitAndClick(".custom-input-checkbox");
+            return waitForCheckBoxAndClick;
+        }).then(function(){
+            let waitForTextBox = cTab.waitForSelector(".custominput" , {visible:true});
+            return waitForTextBox;
+        }).then(function(){
+            let codeWillBeAddedPromise =cTab.type(".custominput" , answers[0] , {delay:5});
+            return codeWillBeAddedPromise;
+        }).then(function(){
+            let ctrlWillBeDownPromise = cTab.keyboard.down("Control");
+            return ctrlWillBeDownPromise;
+        }).then(function(){
+            let aWillBePressedPromise = cTab.keyboard.press("a");
+            return aWillBePressedPromise;
+        }).then(function(){
+            let xWillBePressedPromise = cTab.keyboard.press("x");
+            return xWillBePressedPromise;
+        }).then(function(){
+            let pointerWilBeClicked = cTab.click(".monaco-editor.no-user-select.vs");
+            return pointerWilBeClicked;
+        }).then(function(){
+            let aWillBePressedOnpinter = cTab.keyboard.press("a");
+            return aWillBePressedOnpinter;
+        }).then(function(){
+            let codePastePromise = cTab.keyboard.press("v");
+            return codePastePromise;
+        }).then(function(){
+            let submitWillClickedPromise = cTab.click(".pull-right.btn.btn-primary.hr-monaco-submit");
+            return submitWillClickedPromise;
+        })
+        // ctrl A
+            // ctrl X
+            // Code editor code paste-> 
+        .then(function(){
+            resolve();
+        }).catch(function(err){
+            reject(err);
+        })
 
-function questionSolver(url){
-    
+    })
 }
      // dynamic site -> id change
 
