@@ -18,10 +18,10 @@ browseropenPromise
         return visitLoginpagePromise;
     }).then(function (visitPage){
         console.log(visitPage);
-        let emailWillTypedpromise = cTab.type("input[name='username']" , "cawav12570@kindbest.com" , {delay:200});
+        let emailWillTypedpromise = cTab.type("input[name='username']" , "cawav12570@kindbest.com" , {delay:20});
         return emailWillTypedpromise;
     }).then(function(){
-        let passwordWillTypedpromise = cTab.type("input[name='password']" , "qwerty123456" , {delay:200});
+        let passwordWillTypedpromise = cTab.type("input[name='password']" , "qwerty123456" , {delay:20});
         return passwordWillTypedpromise;
     }).then(function(){
         let loginPromise = cTab.click("button[data-analytics='LoginPassword");
@@ -47,10 +47,10 @@ browseropenPromise
         let linkArrPromise = cTab.evaluate(ConsoleWalaFn);
         return linkArrPromise;
     }).then(function(linkArr){
-        let questionWillBeSolvedPromise = questionSolver(linkArr[0] , 0);
+        let questionWillBeSolvedPromise = questionSolver(linkArr[0] , 1);
         return questionWillBeSolvedPromise;
     }).then(function(){
-        resolve();
+        console.log("question solved");
     }).then(function(err){
         reject(err);
     })
@@ -83,7 +83,7 @@ function questionSolver(url ,idx){
             let waitForTextBox = cTab.waitForSelector(".custominput" , {visible:true});
             return waitForTextBox;
         }).then(function(){
-            let codeWillBeAddedPromise =cTab.type(".custominput" , answers[0] , {delay:5});
+            let codeWillBeAddedPromise =cTab.type(".custominput" , answers[idx] , {delay:5});
             return codeWillBeAddedPromise;
         }).then(function(){
             let ctrlWillBeDownPromise = cTab.keyboard.down("Control");
