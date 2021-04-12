@@ -48,7 +48,7 @@ browseropenPromise
         return linkArrPromise;
     }).then(function(linkArr){
         let questionWillBeSolvedPromise = questionSolver(linkArr[0] , 1);
-        return questionWillBeSolvedPromise;
+        
     }).then(function(){
         console.log("question solved");
     }).then(function(err){
