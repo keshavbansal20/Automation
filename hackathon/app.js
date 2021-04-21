@@ -1,13 +1,16 @@
 const puppeteer = require("puppeteer");
 let PDFDocument = require("pdfkit");
 let fs = require("fs");
+let wbm = require("wbm");
+let taskname = process.arg[2];
+let time = process.env.args[4];
 let cTab;
 (async function fn(){
     try{
         let browserOpenPromise = puppeteer.launch({
             headless:false,
             defaultViewport:null,
-            args:["--start-maximized"]
+            args: ["--no-sandbox"]
         });
         let browser = await browserOpenPromise;
         
@@ -73,11 +76,17 @@ let cTab;
 
 async function whatsapp(pdfDoc){
     try{
-        await cTab.goto("https://web.whatsapp.com/");
-        await waitAndClick("._1JAUF._1d1OL>._2_1wd.copyable-text.selectable-text");
-        await cTab.type("._1JAUF._1d1OL>._2_1wd.copyable-text.selectable-text","Ganesh");
-        const fileInput = await waitAndClick("._35k-1._1adfa._3-8er>.matched-text._3-8er");
-        await fileInput.uploadFile ("./Tasklist.pdf");
+       
+        // await cTab.type("._1JAUF._1d1OL>._2_1wd.copyable-text.selectable-text","Ganesh");
+        //  await waitAndClick("._35k-1._1adfa._3-8er>.matched-text._3-8er");
+        // await fileInput.uploadFile ("./Tasklist.pdf");
+        
+        wbm.start().then(async () => {
+            const phones = ['1234564','4646'];
+            await wbm.send(phones, 'ji');
+            await wbm.send(phones, "./Tasklist.pdf");
+            await wbm.end();
+        }).catch(err => console.log(err));
         
     }
     catch(err){
