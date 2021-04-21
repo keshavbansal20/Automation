@@ -83,9 +83,9 @@ async function addingtask(){
         console.log("yes happend");
         // await waitAndClick(".public-DraftStyleDefault-block.public-DraftStyleDefault-ltr");
 
-        await cTab.type(".public-DraftStyleDefault-block.public-DraftStyleDefault-ltr","Eat breakfast",{delay:200});
+        await cTab.type(".public-DraftStyleDefault-block.public-DraftStyleDefault-ltr",taskname,{delay:200});
         await cTab.click('button[class="item_due_selector icon_pill"]');
-        await cTab.type('input[placeholder="Type a due date"]',"Every monday",{delay:20});
+        await cTab.type('input[placeholder="Type a due date"]',time,{delay:20});
         await cTab.keyboard.press('Enter');
         await cTab.click(".ist_button.ist_button_red");
     }catch(err){
