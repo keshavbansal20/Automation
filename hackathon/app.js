@@ -2,8 +2,9 @@ const puppeteer = require("puppeteer");
 let PDFDocument = require("pdfkit");
 let fs = require("fs");
 let wbm = require("wbm");
-let taskname = process.arg[2];
-let time = process.env.args[4];
+let taskname = process.argv[2];
+let time = process.argv[3];
+console.log(taskname , time);
 let cTab;
 (async function fn(){
     try{
