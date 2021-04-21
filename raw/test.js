@@ -1,15 +1,12 @@
-let a = ["a", "b"]
-a[2] = a
-function f(a) {
-a = a[2]
-console.log(a);
-let n = Array("a", "b")
-console.log(a[2] = n);
-console.log(a);
-console.log(n);
-a = n;
-console.log(a);
+function fn(num1 , num2){
+    if((num1%2==0)&&(num1/num2)){
+        return num1/num2;
+    }else{
+        console.error("incompatible type");
+    }
+};
+
+let val = fn(4 ,8);
+if(val!=undefined){
+    console.log(val);
 }
-console.log(a);
-f(a)
-console.log(a);
