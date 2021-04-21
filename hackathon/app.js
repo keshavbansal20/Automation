@@ -18,26 +18,14 @@ let cTab;
         let allTabsArr = await browser.pages();
         cTab = allTabsArr[0];
         await cTab.setDefaultNavigationTimeout(0);
+
         await cTab.goto("https://todoist.com/app/");
-        await cTab.waitForSelector('.input[type="email"]');
-        await cTab.type('input[type="email"]',"salvatotuckertmp642@gmail.com", {delay:20});
-        await cTab.waitForSelector('input[type="password"]');
-        await cTab.type('input[type="password"]', '_7*83V_G$MPi_8d',{delay:20});
-    
-        await cTab.click(".submit_btn.ist_button.ist_button_red.sel_login");
+        await fillthecredentials();  //function for email ,password
+        await addingtask();
 
         
         //adding a task
-        await cTab.waitForSelector('.plus_add_button');
-        await cTab.evaluate(consolefn,".plus_add_button");
-        console.log("yes happend");
-        // await waitAndClick(".public-DraftStyleDefault-block.public-DraftStyleDefault-ltr");
-
-        await cTab.type(".public-DraftStyleDefault-block.public-DraftStyleDefault-ltr","Eat breakfast",{delay:200});
-        await cTab.click('button[class="item_due_selector icon_pill"]');
-        await cTab.type('input[placeholder="Type a due date"]',"Every monday",{delay:20});
-        await cTab.keyboard.press('Enter');
-        await cTab.click(".ist_button.ist_button_red");
+       
         await cTab.click("#filter_inbox");
        let list =   await cTab.evaluate(function() {
             let allTasks = document.querySelectorAll(".task_list_item__content");
@@ -74,7 +62,36 @@ let cTab;
     }
 })();
 
+async function fillthecredentials(){
+    try{
+        await cTab.waitForSelector('.input[type="email"]');
+        await cTab.type('input[type="email"]',"salvatotuckertmp642@gmail.com", {delay:20});
+        await cTab.waitForSelector('input[type="password"]');
+        await cTab.type('input[type="password"]', '_7*83V_G$MPi_8d',{delay:20});
+    
+        await cTab.click(".submit_btn.ist_button.ist_button_red.sel_login");
+    }catch(err){
+        console.log(err);
+    }
+}
 
+
+async function addingtask(){
+    try{
+        await cTab.waitForSelector('.plus_add_button');
+        await cTab.evaluate(consolefn,".plus_add_button");
+        console.log("yes happend");
+        // await waitAndClick(".public-DraftStyleDefault-block.public-DraftStyleDefault-ltr");
+
+        await cTab.type(".public-DraftStyleDefault-block.public-DraftStyleDefault-ltr","Eat breakfast",{delay:200});
+        await cTab.click('button[class="item_due_selector icon_pill"]');
+        await cTab.type('input[placeholder="Type a due date"]',"Every monday",{delay:20});
+        await cTab.keyboard.press('Enter');
+        await cTab.click(".ist_button.ist_button_red");
+    }catch(err){
+        console.log(err);
+    }
+}
 async function whatsapp(pdfDoc){
     try{
        
